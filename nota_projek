@@ -1,0 +1,41 @@
+# 1: always cek connnection api dulu
+
+# 2: fahamkan data yang api bagi
+# data.keys = jenis keadaan data yang diberi
+# len(data["Players"]) = view data
+
+# 3 : baru sort data atau filter mengikut keperluan kita
+# HERO ID - HERO DATABASE - HERO NAME - SPECTRE? - ANALYZE
+# apa yang dijumpai dalam data yang diberikan oleh OPENDOTA ? :
+# basic stat , farming performance, economy, damage impact, item data, duration.
+
+# 4: cari hero atau player yang kita nak (data yang)
+
+# for player in data["players"]:
+#     print(
+#         player["personaname"],
+#         player["hero_id"],
+#         player["kills"],
+#         player["deaths"],
+#         player["assists"]
+#     )
+
+# 5 : hero mapping : untuk dapatkan spesifik nama hero
+
+# REMARK : SEKARANG ADA 2 API SOURCES . 1. MATCH DETAILS (OPENDOTA) 2. HERO INFORMATION (PUN OPENDOTA)
+
+# 6 : buat dictionary : tujuan untuk convert data tu human readable information
+
+# 6 : user masukkan hero - system cari hero tersebut 
+# enter hero = 'spectre'
+
+## KESIMPULAN SETAKAT INI :
+
+# API hidup
+# Data match boleh dibaca
+# Hero boleh dikenali
+# Player boleh dikesan
+# Modular function berjalan
+
+# 7 : buat performance display
+
