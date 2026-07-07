@@ -1,0 +1,61 @@
+DOTA POS 1 IMPROVEMENT COACH
+============================
+
+Project Objective:
+Build a Python-based Dota 2 match analyzer
+focused on Position 1 players.
+
+--------------------------------
+
+DAY 1 - Project Setup
+
+Completed:
+- Created Python project structure
+- Setup virtual environment
+- Installed requests library
+- Connected OpenDota API
+
+Achievement:
+Successfully retrieved match data using Match ID.
+
+--------------------------------
+
+DAY 2 - Data Extraction
+
+Completed:
+- Retrieved match JSON data
+- Explored OpenDota response structure
+- Extracted players information
+- Retrieved hero database from OpenDota API
+
+Achievement:
+Successfully converted hero_id into hero name.
+
+--------------------------------
+
+DAY 3 - Player Identification
+
+Completed:
+- Created hero mapping system
+- Created function to search player based on selected hero
+- Successfully detected Spectre player from match
+
+Achievement:
+System can identify selected hero performance.
+
+--------------------------------
+
+DAY 4 - Performance Display
+
+Completed:
+- Created player performance report
+
+Displayed:
+- KDA
+- Last Hits
+- Denies
+- GPM
+- XPM
+- Net Worth
+- Hero Damage
+- Tower Damage
