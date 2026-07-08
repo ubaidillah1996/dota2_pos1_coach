@@ -1,6 +1,6 @@
 # from api import get_match
 from api import get_match, get_heroes
-from analyzer import (find_player_by_hero, display_performance, farming_analysis)
+from analyzer import (find_player_by_hero, display_performance, farming_analysis, kda_analysis)
 
 
 match_id = 8881925243
@@ -60,4 +60,6 @@ player = find_player_by_hero(
 display_performance(player)
 
 farming_analysis(player)
+
+kda_analysis(player)
 ## report or summary pertama is done : match id + hero = display performance.

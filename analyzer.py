@@ -28,7 +28,7 @@ def display_performance(player):
         player["assists"]
     )
 
-    print("Last Hits:", player["last_hits"])
+    # print("Last Hits:", player["last_hits"])
     print("Denies:", player["denies"])
 
     print("GPM:", player["gold_per_min"])
@@ -66,3 +66,36 @@ def farming_analysis(player): # function baru : farming analisis
         
         print("Rating:", rating)
         print("Insight:", insight)
+
+def kda_analysis(player):
+
+    kills = player["kills"]
+    deaths = player["deaths"]
+    assists = player["assists"]
+
+    kda_ratio = (kills + assists) / deaths if deaths != 0 else kills + assists
+
+    print("\n====== KDA ANALYSIS ======")
+
+    print("Kills:", kills)
+    print("Deaths:", deaths)
+    print("Assists:", assists)
+
+    print("KDA Ratio:", round(kda_ratio, 2))
+
+    if deaths <= 5:
+        rating = "Excellent"
+        insight = "Good survival and positioning."
+
+    elif deaths <= 8:
+        rating = "Average"
+        insight = "Acceptable, but positioning needs improvement."
+
+    else:
+        rating = "Needs Improvement"
+        insight = "High death count. Focus on positioning and fight selection."
+
+    print("Rating:", rating)
+    print("Insight:", insight)
+
+    # problem muncul : space atau jarak. solusi : CTR + A , lepas tu SHIFT + ALTERNATE + F untuk auto format indentation.
