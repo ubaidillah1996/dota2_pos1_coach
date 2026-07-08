@@ -37,5 +37,18 @@
 # Player boleh dikesan
 # Modular function berjalan
 
-# 7 : buat performance display
+# 7 : buat performance display, 8 display analysis + kda analysis ; done
+
+# 9 : ITEM ANALYSIS.
+# problem : data yang diberikan oleh opendota, sama seperti hero, perlu diconvert dahulu.
+# buat function baru 
+
+## take note : API DATA TAK SEMESTINYA CLEAN . ada kena cari cara panggil, id, nama dan lain2, jadi kena test satu-satu.
+# item id - item map - item name : berjaya
+# sebelum display item suggestion , etc, perlu boleh baca item yang dipakai oleh user.
+
+# next, basic item timing analysis . adakah item siap pada timing yang sesuai.
+# untuk cek ni, pakai opendota = player["purhcase_log"]
+
+# terpaksa skip item timing dahulu, fokus enemy core detection.
 

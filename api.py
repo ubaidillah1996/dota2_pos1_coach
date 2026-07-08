@@ -28,3 +28,14 @@ def get_heroes():
     return None
 
 ### TUJUAN : DISPLAY PLAYER + HERO + STATS
+
+def get_items():
+
+    url = "https://api.opendota.com/api/constants/items"
+    
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        return response.json()
+    
+    return None

@@ -99,3 +99,123 @@ def kda_analysis(player):
     print("Insight:", insight)
 
     # problem muncul : space atau jarak. solusi : CTR + A , lepas tu SHIFT + ALTERNATE + F untuk auto format indentation.
+
+def display_items(player, item_map):
+
+    print("\n====== CURRENT ITEMS ======")
+
+    item_slots = [
+        "item_0",
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+    ]
+
+    for slot in item_slots:
+
+        item_id = player[slot]
+
+        if item_id != 0:
+            item_name = item_map.get(item_id, "Unknown Item") # guna item_map.get sbb kalau ada format item pelik, py tak crash.
+
+            print("-", item_name)
+
+def get_enemy_players(players, target_player):
+
+    enemy_players = []
+
+    for player in players:
+
+        if player["team_number"] != target_player["team_number"]:
+            enemy_players.append(player)
+        
+    return enemy_players
+
+def threat_analysis(enemy_players, hero_map):
+
+    print("\n====== THREAT ANALYSIS ======")
+
+    for enemy in enemy_players:
+
+        hero_name = hero_map[enemy["hero_id"]]
+
+        if hero_name in THREATS:
+
+            print("\nHero:", hero_name)
+
+            print(
+                "Threat:",
+                THREATS[hero_name]
+            )
+
+THREATS = {
+
+    "Kunkka":
+    "Strong teamfight control and burst damage.",
+
+    "Skywrath Mage":
+    "High magical burst damage.",
+
+    "Axe":
+    "Can lock down carries and punish positioning.",
+
+    "Sniper":
+    "Long range damage dealer.",
+
+    "Legion Commander":
+    "Dangerous single target lockdown.",
+
+    "Omniknight":
+    "Can protect allies and extend fights."
+}
+
+def item_recommendation(enemy_players, hero_map):
+
+    print("\n====== ITEM RECOMMENDATION ======")
+
+    recommended = []
+
+    for enemy in enemy_players:
+
+        hero_name = hero_map[enemy["hero_id"]]
+
+        if hero_name in ITEM_RECOMMENDATION:
+
+            item = ITEM_RECOMMENDATION[hero_name]
+
+            recommended.append(item)
+
+            print("\nAgainst:", hero_name)
+            print("Suggest:", item["item"])
+            print("Reason:", item["reason"])
+
+
+ITEM_RECOMMENDATION = {
+
+    "Skywrath Mage":
+    {
+        "item": "Black King Bar",
+        "reason": "Need magic immunity against high burst damage."
+    },
+
+    "Sniper":
+    {
+        "item": "Butterfly",
+        "reason": "Increase survivability against physical damage."
+    },
+
+    "Axe":
+    {
+        "item": "Linken's Sphere",
+        "reason": "Avoid single target initiation."
+    },
+
+    "Legion Commander":
+    {
+        "item": "Linken's Sphere",
+        "reason": "Avoid Duel lockdown."
+    }
+}
+
