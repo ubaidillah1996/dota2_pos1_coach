@@ -37,7 +37,7 @@
 # Player boleh dikesan
 # Modular function berjalan
 
-# 7 : buat performance display, 8 display analysis + kda analysis ; done
+# 7 : buat performance display, 8 :  display analysis + kda analysis ; done
 
 # 9 : ITEM ANALYSIS.
 # problem : data yang diberikan oleh opendota, sama seperti hero, perlu diconvert dahulu.
@@ -51,4 +51,18 @@
 # untuk cek ni, pakai opendota = player["purhcase_log"]
 
 # terpaksa skip item timing dahulu, fokus enemy core detection.
+
+## step pertama 1 : display enemy heroes.
+## step kedua : threat analysis
+
+# 10 : ITEM RECOMMENDATION system
+# suggesting item based on enemy skills
+# rule-based = enemy threat - RECOMMENDATION
+
+# 11 : ENEMY CORE IDENTIFICATION 
+#  sbb, item yang dicadangkan adlah fokus kepada enemy core 1 threat
+# guna hero role database.
+
+# flow terjadi :
+# enemy player - check hero roles - identify core - threat analysis - items suggestion
 

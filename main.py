@@ -1,3 +1,6 @@
+#  BAHAGIAN BUSINESS LOGIC IS BASED APA YANG AKU FAHAM UNTUK MASALAH APA YANG AKU NAK OVERCOME .
+# AI HANYA BAGI CODE, LOGIC IS FROM ME.
+
 # from api import get_match
 from api import get_match, get_heroes, get_items
 from analyzer import (find_player_by_hero, display_performance, farming_analysis, kda_analysis, display_items, threat_analysis)
@@ -106,9 +109,15 @@ item_recommendation(enemy_players, hero_map)
 print("\n====== ENEMY TEAM ======")
 
 for enemy in enemy_players:
-    print(
-        enemy["personaname"],
-        "|",
-        hero_map[enemy["hero_id"]]
-    )
+    # print(
+    #     enemy["personaname"],
+    #     "|",
+    #     hero_map[enemy["hero_id"]]
+    # )
 
+    # player_name = enemy.get("personaname", "Unknown Player") # disable this, sbb ada player takde personaname.
+
+    player_name = enemy.get("personaname", "Unknown Player")
+    hero_name = enemy.get("hero", "Unknown Hero")
+
+    print(f"{player_name} | {hero_name}")

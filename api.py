@@ -31,7 +31,7 @@ def get_heroes():
 
 def get_items():
 
-    url = "https://api.opendota.com/api/constants/items"
+    url = "https://api.opendota.com/api/constants/items" # tujuan dapatkan data untuk mapping items
     
     response = requests.get(url)
 
