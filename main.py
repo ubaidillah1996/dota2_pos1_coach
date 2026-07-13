@@ -7,15 +7,27 @@ from analyzer import (find_player_by_hero, display_performance, farming_analysis
 from analyzer import get_enemy_players
 from analyzer import item_recommendation
 from graph import create_benchmark_chart
+from input_handler import get_user_input
 
 
 # match_id = 845004963
 
-match_id = int(
-    input("Enter Match ID: ")
-)
+match_id, target_hero = get_user_input()
+
+# match_id = int(
+#     input("Enter Match ID: ")
+# )
 
 data = get_match(match_id)
+
+if not data:
+
+    print(
+        "Match data not found."
+    )
+
+    exit()
+
 heroes = get_heroes()
 items = get_items()
 
@@ -76,9 +88,9 @@ for item_name, item_data in items.items():
 
 # target_hero = "spectre"
 
-target_hero = input(
-    "Enter Carry Hero: "
-)
+# target_hero = input(
+#     "Enter Carry Hero: "
+# )
 
 player = find_player_by_hero(
     data["players"],
@@ -88,7 +100,15 @@ player = find_player_by_hero(
 )
 
 if player is None:
-    print("Player not found.")
+
+    print(
+        "\nPlayer not found."
+    )
+
+    print(
+        "Please check hero name or match ID."
+    )
+
     exit()
 
 print("TARGET HERO:", target_hero)
