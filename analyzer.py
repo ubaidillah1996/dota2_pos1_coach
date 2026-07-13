@@ -1,4 +1,6 @@
 # untuk cari hero
+from benchmark import BENCHMARK
+
 
 def find_player_by_hero(players, hero_map, target_hero):
 
@@ -219,3 +221,87 @@ ITEM_RECOMMENDATION = {
     }
 }
 
+from benchmark import BENCHMARK
+
+
+def benchmark_analysis(player):
+
+    duration_minutes = player["duration"] / 60
+
+    lh_per_min = player["last_hits"] / duration_minutes
+
+    kda_ratio = (
+        player["kills"] + player["assists"]
+    ) / player["deaths"] if player["deaths"] != 0 else (
+        player["kills"] + player["assists"]
+    )
+
+    damage_per_min = (
+        player["hero_damage"] / duration_minutes
+    )
+
+
+    print("\n====== BENCHMARK ANALYSIS ======")
+
+
+    # Farming
+
+    print("\nFarming:")
+
+    print(
+        "Your LH/min:",
+        round(lh_per_min,2)
+    )
+
+    print(
+        "Benchmark:",
+        BENCHMARK["lh_per_min"]
+    )
+
+
+    if lh_per_min >= BENCHMARK["lh_per_min"]:
+        print("Status: Above Average")
+    else:
+        print("Status: Needs Improvement")
+
+
+    # GPM
+
+    print("\nGold:")
+
+    print(
+        "Your GPM:",
+        player["gold_per_min"]
+    )
+
+    print(
+        "Benchmark:",
+        BENCHMARK["gpm"]
+    )
+
+
+    if player["gold_per_min"] >= BENCHMARK["gpm"]:
+        print("Status: Above Average")
+    else:
+        print("Status: Needs Improvement")
+
+
+    # KDA
+
+    print("\nKDA:")
+
+    print(
+        "Your KDA:",
+        round(kda_ratio,2)
+    )
+
+    print(
+        "Benchmark:",
+        BENCHMARK["kda_ratio"]
+    )
+
+
+    if kda_ratio >= BENCHMARK["kda_ratio"]:
+        print("Status: Good")
+    else:
+        print("Status: Improve Fighting Decision")

@@ -3,9 +3,11 @@
 
 # from api import get_match
 from api import get_match, get_heroes, get_items
-from analyzer import (find_player_by_hero, display_performance, farming_analysis, kda_analysis, display_items, threat_analysis)
+from analyzer import (find_player_by_hero, display_performance, farming_analysis, kda_analysis, display_items, threat_analysis, benchmark_analysis)
 from analyzer import get_enemy_players
 from analyzer import item_recommendation
+from graph import performance_graph
+
 
 match_id = 845004963
 
@@ -77,6 +79,10 @@ player = find_player_by_hero(
 
 )
 
+if player is None:
+    print("Player not found.")
+    exit()
+
 print("TARGET HERO:", target_hero)
 
 print("\n=== HERO DALAM MATCH ===")
@@ -92,6 +98,10 @@ display_performance(player)
 farming_analysis(player)
 
 kda_analysis(player)
+
+performance_graph(player)
+
+benchmark_analysis(player)
 
 ## report or summary pertama is done : match id + hero = display performance.
 
@@ -118,15 +128,11 @@ item_recommendation(enemy_players, hero_map)
 print("\n====== ENEMY TEAM ======")
 
 for enemy in enemy_players:
-    # print(
-    #     enemy["personaname"],
-    #     "|",
-    #     hero_map[enemy["hero_id"]]
-    # )
-
-    # player_name = enemy.get("personaname", "Unknown Player") # disable this, sbb ada player takde personaname.
 
     player_name = enemy.get("personaname", "Unknown Player")
-    hero_name = enemy.get("hero", "Unknown Hero")
+    hero_name = hero_map[enemy["hero_id"]]
 
     print(f"{player_name} | {hero_name}")
+
+## problems : OpenDota API returns hero information as hero_id instead of hero name.
+## solutions : Created hero mapping dictionary to convert hero_id into readable hero name.
