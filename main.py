@@ -101,7 +101,10 @@ kda_analysis(player)
 
 performance_graph(player)
 
-benchmark_analysis(player)
+benchmark_result = benchmark_analysis(player)
+
+print("TEST BENCHMARK:")
+print(benchmark_result)
 
 ## report or summary pertama is done : match id + hero = display performance.
 

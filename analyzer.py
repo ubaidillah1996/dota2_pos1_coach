@@ -221,6 +221,92 @@ ITEM_RECOMMENDATION = {
     }
 }
 
+# from benchmark import BENCHMARK
+
+
+# def benchmark_analysis(player):
+
+#     duration_minutes = player["duration"] / 60
+
+#     lh_per_min = player["last_hits"] / duration_minutes
+
+#     kda_ratio = (
+#         player["kills"] + player["assists"]
+#     ) / player["deaths"] if player["deaths"] != 0 else (
+#         player["kills"] + player["assists"]
+#     )
+
+#     damage_per_min = (
+#         player["hero_damage"] / duration_minutes
+#     )
+
+
+#     print("\n====== BENCHMARK ANALYSIS ======")
+
+
+#     # Farming
+
+#     print("\nFarming:")
+
+#     print(
+#         "Your LH/min:",
+#         round(lh_per_min,2)
+#     )
+
+#     print(
+#         "Benchmark:",
+#         BENCHMARK["lh_per_min"]
+#     )
+
+
+#     if lh_per_min >= BENCHMARK["lh_per_min"]:
+#         print("Status: Above Average")
+#     else:
+#         print("Status: Needs Improvement")
+
+
+#     # GPM
+
+#     print("\nGold:")
+
+#     print(
+#         "Your GPM:",
+#         player["gold_per_min"]
+#     )
+
+#     print(
+#         "Benchmark:",
+#         BENCHMARK["gpm"]
+#     )
+
+
+#     if player["gold_per_min"] >= BENCHMARK["gpm"]:
+#         print("Status: Above Average")
+#     else:
+#         print("Status: Needs Improvement")
+
+
+#     # KDA
+
+#     print("\nKDA:")
+
+#     print(
+#         "Your KDA:",
+#         round(kda_ratio,2)
+#     )
+
+#     print(
+#         "Benchmark:",
+#         BENCHMARK["kda_ratio"]
+#     )
+
+
+#     if kda_ratio >= BENCHMARK["kda_ratio"]:
+#         print("Status: Good")
+#     else:
+#         print("Status: Improve Fighting Decision")
+
+
 from benchmark import BENCHMARK
 
 
@@ -236,72 +322,79 @@ def benchmark_analysis(player):
         player["kills"] + player["assists"]
     )
 
-    damage_per_min = (
-        player["hero_damage"] / duration_minutes
-    )
+    performance = {
+
+    "Farming": {
+
+        "player": round(lh_per_min,2),
+
+        "benchmark": BENCHMARK["lh_per_min"],
+
+        "difference": round(
+            lh_per_min - BENCHMARK["lh_per_min"],
+            2
+        ),
+
+        "status":
+        "Above Average"
+        if lh_per_min >= BENCHMARK["lh_per_min"]
+        else "Needs Improvement"
+    },
 
 
-    print("\n====== BENCHMARK ANALYSIS ======")
+    "Gold": {
+
+        "player": player["gold_per_min"],
+
+        "benchmark": BENCHMARK["gpm"],
+
+        "difference":
+        player["gold_per_min"] - BENCHMARK["gpm"],
+
+        "status":
+        "Above Average"
+        if player["gold_per_min"] >= BENCHMARK["gpm"]
+        else "Needs Improvement"
+    },
 
 
-    # Farming
+    "KDA": {
 
-    print("\nFarming:")
+        "player": round(kda_ratio,2),
 
-    print(
-        "Your LH/min:",
-        round(lh_per_min,2)
-    )
+        "benchmark": BENCHMARK["kda_ratio"],
 
-    print(
-        "Benchmark:",
-        BENCHMARK["lh_per_min"]
-    )
+        "difference":
+        round(
+            kda_ratio - BENCHMARK["kda_ratio"],
+            2
+        ),
 
+        "status":
+        "Good"
+        if kda_ratio >= BENCHMARK["kda_ratio"]
+        else "Needs Improvement"
+        }
+    }
 
-    if lh_per_min >= BENCHMARK["lh_per_min"]:
-        print("Status: Above Average")
-    else:
-        print("Status: Needs Improvement")
+    return performance
 
+    # performance = {
 
-    # GPM
+    #     "Farming": {
+    #         "player": round(lh_per_min, 2),
+    #         "benchmark": BENCHMARK["lh_per_min"]
+    #     },
 
-    print("\nGold:")
+    #     "Gold": {
+    #         "player": player["gold_per_min"],
+    #         "benchmark": BENCHMARK["gpm"]
+    #     },
 
-    print(
-        "Your GPM:",
-        player["gold_per_min"]
-    )
-
-    print(
-        "Benchmark:",
-        BENCHMARK["gpm"]
-    )
-
-
-    if player["gold_per_min"] >= BENCHMARK["gpm"]:
-        print("Status: Above Average")
-    else:
-        print("Status: Needs Improvement")
+    #     "KDA": {
+    #         "player": round(kda_ratio, 2),
+    #         "benchmark": BENCHMARK["kda_ratio"]
+    #     }
+    # }
 
 
-    # KDA
-
-    print("\nKDA:")
-
-    print(
-        "Your KDA:",
-        round(kda_ratio,2)
-    )
-
-    print(
-        "Benchmark:",
-        BENCHMARK["kda_ratio"]
-    )
-
-
-    if kda_ratio >= BENCHMARK["kda_ratio"]:
-        print("Status: Good")
-    else:
-        print("Status: Improve Fighting Decision")
