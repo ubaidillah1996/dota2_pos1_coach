@@ -7,7 +7,7 @@ from analyzer import (find_player_by_hero, display_performance, farming_analysis
 from analyzer import get_enemy_players
 from analyzer import item_recommendation
 
-match_id = 8881925243
+match_id = 845004963
 
 data = get_match(match_id)
 heroes = get_heroes()
@@ -21,7 +21,6 @@ for hero in heroes:
 
 # for player in data["players"]:
 #     hero_name = hero_map[player["hero_id"]]
-
 #     print(
 #         player["personaname"],
 #         "|",
@@ -69,7 +68,7 @@ for item_name, item_data in items.items():
 #         player["assists"]
 #     )
 
-target_hero = "Spectre"
+target_hero = "spectre"
 
 player = find_player_by_hero(
     data["players"],
@@ -77,6 +76,16 @@ player = find_player_by_hero(
     target_hero # data = get_match(match_id)
 
 )
+
+print("TARGET HERO:", target_hero)
+
+print("\n=== HERO DALAM MATCH ===")
+
+for p in data["players"]:
+    print(hero_map[p["hero_id"]])
+
+print("PLAYER CHECK:")
+print(player)
 
 display_performance(player)
 
