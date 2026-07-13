@@ -397,4 +397,87 @@ def benchmark_analysis(player):
     #     }
     # }
 
+def generate_coach_report(performance, player):
 
+    print("\n================================")
+    print("       DOTA POS 1 COACH")
+    print("================================")
+
+
+    print("\n====== PERFORMANCE SUMMARY ======")
+
+
+    for metric, data in performance.items():
+
+        print("\n" + metric)
+
+        print(
+            "Your:",
+            data["player"]
+        )
+
+        print(
+            "Benchmark:",
+            data["benchmark"]
+        )
+
+        print(
+            "Difference:",
+            data["difference"]
+        )
+
+        print(
+            "Status:",
+            data["status"]
+        )
+
+
+    print("\n====== COACH INSIGHT ======")
+
+
+    # Farming insight
+
+    if performance["Farming"]["status"] == "Above Average":
+
+        print(
+            "✓ Strong farming efficiency"
+        )
+
+    else:
+
+        print(
+            "✗ Farming needs improvement"
+        )
+
+
+    # Gold insight
+
+    if performance["Gold"]["status"] == "Above Average":
+
+        print(
+            "✓ Good gold accumulation"
+        )
+
+    else:
+
+        print(
+            "✗ Need better gold generation"
+        )
+
+
+    # Death analysis
+
+    deaths = player["deaths"]
+
+
+    if deaths > 8:
+
+        print(
+            "✗ High death count. Improve positioning."
+        )
+
+    else:
+
+        print(
+            "✓ Good survival"
+        )

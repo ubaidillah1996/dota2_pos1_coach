@@ -1,26 +1,62 @@
 import matplotlib.pyplot as plt
 
 
-def performance_graph(player):
+def create_benchmark_chart(performance):
 
-    metrics = {
-        "GPM": player["gold_per_min"],
-        "XPM": player["xp_per_min"],
-        "Hero Damage": player["hero_damage"],
-        "Tower Damage": player["tower_damage"]
-    }
+    metrics = []
+    player_values = []
+    benchmark_values = []
 
-    names = list(metrics.keys())
-    values = list(metrics.values())
+
+    for metric, data in performance.items():
+
+        metrics.append(metric)
+
+        player_values.append(
+            data["player"]
+        )
+
+        benchmark_values.append(
+            data["benchmark"]
+        )
+
+
+    x = range(len(metrics))
+
 
     plt.figure(figsize=(8,5))
 
-    plt.bar(names, values)
 
-    plt.title("Player Performance Overview")
+    plt.bar(
+        x,
+        player_values,
+        width=0.4,
+        label="Player"
+    )
 
-    plt.ylabel("Value")
 
-    plt.xticks(rotation=45)
+    plt.bar(
+        [i + 0.4 for i in x],
+        benchmark_values,
+        width=0.4,
+        label="Benchmark"
+    )
+
+
+    plt.xticks(
+        [i + 0.2 for i in x],
+        metrics
+    )
+
+
+    plt.ylabel("Performance Value")
+
+    plt.title(
+        "Carry Performance vs Benchmark"
+    )
+
+
+    plt.legend()
+
 
     plt.show()

@@ -3,13 +3,17 @@
 
 # from api import get_match
 from api import get_match, get_heroes, get_items
-from analyzer import (find_player_by_hero, display_performance, farming_analysis, kda_analysis, display_items, threat_analysis, benchmark_analysis)
+from analyzer import (find_player_by_hero, display_performance, farming_analysis, kda_analysis, display_items, threat_analysis, benchmark_analysis, generate_coach_report)
 from analyzer import get_enemy_players
 from analyzer import item_recommendation
-from graph import performance_graph
+from graph import create_benchmark_chart
 
 
-match_id = 845004963
+# match_id = 845004963
+
+match_id = int(
+    input("Enter Match ID: ")
+)
 
 data = get_match(match_id)
 heroes = get_heroes()
@@ -70,7 +74,11 @@ for item_name, item_data in items.items():
 #         player["assists"]
 #     )
 
-target_hero = "spectre"
+# target_hero = "spectre"
+
+target_hero = input(
+    "Enter Carry Hero: "
+)
 
 player = find_player_by_hero(
     data["players"],
@@ -99,12 +107,18 @@ farming_analysis(player)
 
 kda_analysis(player)
 
-performance_graph(player)
-
 benchmark_result = benchmark_analysis(player)
 
-print("TEST BENCHMARK:")
-print(benchmark_result)
+
+generate_coach_report(
+    benchmark_result,
+    player
+)
+
+
+create_benchmark_chart(
+    benchmark_result
+)
 
 ## report or summary pertama is done : match id + hero = display performance.
 
