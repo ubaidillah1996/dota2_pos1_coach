@@ -24,6 +24,7 @@ from analyzer import (
 )
 
 from graph import create_benchmark_chart
+from report import generate_final_summary
 
 from input_handler import get_user_input
 
@@ -36,6 +37,10 @@ from database import (
     update_note,
     check_existing_analysis,
 )
+from services import (
+    prepare_match_data
+)
+
 
 ## GREETING ##
 
@@ -78,47 +83,38 @@ def analyse_match():
 
         return
 
-    data = get_match(match_id)
+    
 
+    result = prepare_match_data(
+        match_id
+    )
 
-    if not data:
+    
 
-        print("Match data not found.")
+    result = prepare_match_data(
+    match_id
+    )
+
+    if not result:
+
+        print(
+        "Match data not found."
+    )
+
         return
 
 
-    heroes = get_heroes()
-
-    items = get_items()
-
-    #### FINDING HERO
-
-    hero_map = {}
-
-
-    for hero in heroes:
-
-        hero_map[hero["id"]] = hero["localized_name"]
-    
-    ### FINDING ITEM
-    
-    item_map = {}
-
-
-    for item_name, item_data in items.items():
-
-        if "id" in item_data and "dname" in item_data:
-
-            item_map[item_data["id"]] = item_data["dname"]
+    data, hero_map, item_map = result
     
     ### FINDING PLAYER HERO
+
+    
 
     player = find_player_by_hero(
         data["players"],
         hero_map,
         target_hero
         )
-    
 
     if player is None:
 
@@ -148,6 +144,11 @@ def analyse_match():
     benchmark_result = benchmark_analysis(player)
 
     generate_coach_report(
+        benchmark_result,
+        player
+    )
+
+    generate_final_summary(
         benchmark_result,
         player
     )
