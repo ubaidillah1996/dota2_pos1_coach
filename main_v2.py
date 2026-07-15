@@ -241,6 +241,7 @@ def show_history():
         print(f"LH/min: {record[5]}")
         print(f"GPM: {record[6]}")
         print(f"Status: {record[7]}")
+        print(f"Reflection: {record[8]}")
 
         print("-" * 30)
 

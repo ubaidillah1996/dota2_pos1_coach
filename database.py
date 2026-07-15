@@ -146,13 +146,27 @@ def view_history():
 
     cursor.execute(
         """
-        SELECT * FROM analyses
+        SELECT
+            id,
+            match_id,
+            hero,
+            player_name,
+            kda,
+            lh_per_min,
+            gpm,
+            status,
+            notes
+
+        FROM analyses
         """
     )
 
     records = cursor.fetchall()
 
     conn.close()
+
+    return records
+
 
     return records
 
