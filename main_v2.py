@@ -37,6 +37,22 @@ from database import (
     check_existing_analysis,
 )
 
+## GREETING ##
+
+def welcome_screen():
+
+    print("""
+================================
+        DOTA POS 1 COACH
+
+   Analyze.
+   Compare.
+   Improve.
+
+   Carry Performance Analytics
+================================
+""")
+
 ## GETTING USER DETAILS AND DISPLAY IT ##
 
 def analyse_match():
@@ -294,19 +310,24 @@ def delete_record():
 def show_menu():
 
     print("""
-====== DOTA POS 1 COACH ======
+================================
+        DOTA POS 1 COACH
+        AI PERFORMANCE ANALYZER
+================================
 
-1. Analyse New Match
-2. View History
-3. Update Reflection
-4. Delete Analysis
-5. Exit
+[1] Analyse New Match
+[2] View History
+[3] Update Reflection
+[4] Delete Analysis
+[5] Exit
 
 """)
 
 ## MENU CONTROLLER FUNCTION ##
 
 if __name__ == "__main__":
+
+    welcome_screen()
 
     add_notes_column()
 

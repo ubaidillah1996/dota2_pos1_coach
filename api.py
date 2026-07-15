@@ -2,7 +2,7 @@ import requests
 
 def get_match(match_id):
 
-    url = f"https://api.opendota.com/api/matches/8881925243"
+    url = f"https://api.opendota.com/api/matches/8873979053"
 
 
 # def get_match(match_id):
