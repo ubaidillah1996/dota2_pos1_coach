@@ -8,9 +8,14 @@ from analyzer import get_enemy_players
 from analyzer import item_recommendation
 from graph import create_benchmark_chart
 from input_handler import get_user_input
+from database import create_table
+from database import create_table, save_analysis
+from database import view_history
 
 
-# match_id = 845004963
+# match_id = 8881925243
+
+create_table()
 
 match_id, target_hero = get_user_input()
 
@@ -129,6 +134,32 @@ kda_analysis(player)
 
 benchmark_result = benchmark_analysis(player)
 
+kda_value = benchmark_result["KDA"]["player"]
+
+lh_value = benchmark_result["Farming"]["player"]
+
+status = benchmark_result["Farming"]["status"]
+
+save_analysis(
+
+    match_id,
+
+    target_hero,
+
+    player.get(
+        "personaname",
+        "Unknown"
+    ),
+
+    kda_value,
+
+    lh_value,
+
+    player["gold_per_min"],
+
+    status
+
+)
 
 generate_coach_report(
     benchmark_result,
@@ -173,3 +204,22 @@ for enemy in enemy_players:
 
 ## problems : OpenDota API returns hero information as hero_id instead of hero name.
 ## solutions : Created hero mapping dictionary to convert hero_id into readable hero name.
+
+print("\n====== ANALYSIS HISTORY ======")
+
+history = view_history()
+
+print("\n====== ANALYSIS HISTORY ======")
+
+for record in history:
+
+    print(f"\nID: {record[0]}")
+    print(f"Match ID: {record[1]}")
+    print(f"Hero: {record[2].title()}")
+    print(f"Player: {record[3]}")
+    print(f"KDA: {record[4]}")
+    print(f"LH/min: {record[5]}")
+    print(f"GPM: {record[6]}")
+    print(f"Status: {record[7]}")
+
+    print("-" * 30)
