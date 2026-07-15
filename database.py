@@ -3,6 +3,7 @@ import sqlite3
 
 DATABASE_NAME = "dota_coach.db"
 
+## CONNECTING TO DB ##
 
 def create_connection():
 
@@ -12,7 +13,7 @@ def create_connection():
 
     return conn
 
-
+## CREATING TABLE : ##
 
 def create_table():
 
@@ -86,6 +87,8 @@ def create_table():
 
 create_table()
 
+## SAVING / ADD USER MATCHES FUNCTION ##
+
 def save_analysis(
     match_id,
     hero,
@@ -133,6 +136,8 @@ def save_analysis(
 
     conn.close()
 
+## READ / VIEW DATA FUNCTION ##
+
 def view_history():
 
     conn = create_connection()
@@ -151,6 +156,8 @@ def view_history():
 
     return records
 
+## DELETING FUNCTION ##
+
 def delete_analysis(record_id):
 
     conn = create_connection()
@@ -168,6 +175,8 @@ def delete_analysis(record_id):
     conn.commit()
 
     conn.close()
+
+## CREATING FUNCTION FOR NOTES ADD BY USER ##
 
 def add_notes_column():
 
@@ -190,9 +199,11 @@ def add_notes_column():
 
     except Exception as e:
 
-        print("Column already exists.")
+        pass
 
     conn.close()
+
+## CREATING FUNCTION FOR NOTES UPDATE BY USER ##
 
 def update_note(record_id, note):
 
@@ -214,3 +225,34 @@ def update_note(record_id, note):
 
     conn.commit()
     conn.close()
+
+## CHECKING IF DATA ALREADY EXISTED FUNCTION ##
+
+def check_existing_analysis(match_id, hero):
+
+    conn = sqlite3.connect("dota_coach.db")
+
+    cursor = conn.cursor()
+
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM analyses
+        WHERE match_id = ?
+        AND hero = ?
+        """,
+        (
+            match_id,
+            hero
+        )
+    )
+
+
+    result = cursor.fetchone()
+
+
+    conn.close()
+
+
+    return result

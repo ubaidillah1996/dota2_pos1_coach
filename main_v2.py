@@ -6,6 +6,8 @@
 # IMPORT
 # =========================
 
+### IMPORTING ALL DETAILS / MODULES TO THIS FILE 
+
 from api import get_match, get_heroes, get_items
 
 from analyzer import (
@@ -31,7 +33,8 @@ from database import (
     view_history,
     delete_analysis,
     add_notes_column,
-    update_note
+    update_note,
+    check_existing_analysis,
 )
 
 ## GETTING USER DETAILS AND DISPLAY IT ##
@@ -44,6 +47,20 @@ def analyse_match():
 
     match_id, target_hero = get_user_input()
 
+    ## CHECKING EXISTED OR NOT, IF NOT KICK OUT ##
+
+    existing = check_existing_analysis(
+        match_id,
+        target_hero
+    )
+
+    if existing:
+
+        print(
+            "\nAnalysis already exists."
+        )
+
+        return
 
     data = get_match(match_id)
 
@@ -104,7 +121,7 @@ def analyse_match():
         target_hero
         )
     
-    ## DISPLAY DATA ##
+    ### DISPLAY DATA
     
     display_performance(player)
 
@@ -118,6 +135,22 @@ def analyse_match():
         benchmark_result,
         player
     )
+
+    ## CHECKING EXISTING RECORD FUNCTION ##
+
+    existing = check_existing_analysis(
+        match_id,
+        target_hero
+    )
+
+
+    if existing:
+
+        print(
+            "\nAnalysis already exists."
+        )
+
+        return
 
     ### SAVING RECORD
 
@@ -189,7 +222,7 @@ def analyse_match():
         hero_map
     )
 
-## READ HISTORY
+## READ HISTORY FUNCTION ##
 
 def show_history():
 
@@ -211,7 +244,7 @@ def show_history():
 
         print("-" * 30)
 
-## PERSONAL NOTES USER
+## PERSONAL NOTES USER FUNCTION ##
 
 def update_reflection():
 
@@ -236,7 +269,7 @@ def update_reflection():
 
     print("Note updated.")
 
-## DELETE RECORD ANALYSIS
+## DELETE RECORD ANALYSIS FUNCTION ##
 
 def delete_record():
 
@@ -255,7 +288,7 @@ def delete_record():
 
     print("Record deleted.")
 
-### DISPLAY MENU BUTTON
+## DISPLAY MENU BUTTON FUCNTION ##
 
 def show_menu():
 
@@ -270,7 +303,7 @@ def show_menu():
 
 """)
 
-## MENU CONTROLLER ##
+## MENU CONTROLLER FUNCTION ##
 
 if __name__ == "__main__":
 
