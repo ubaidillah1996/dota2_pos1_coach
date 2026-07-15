@@ -11,9 +11,14 @@ from input_handler import get_user_input
 from database import create_table
 from database import create_table, save_analysis
 from database import view_history
+from database import delete_analysis
+from database import add_notes_column
+from database import update_note
 
 
 # match_id = 8881925243
+
+add_notes_column()
 
 create_table()
 
@@ -223,3 +228,17 @@ for record in history:
     print(f"Status: {record[7]}")
 
     print("-" * 30)
+
+# delete_analysis(2) ## testing deleting function
+
+# print("\nRecord ID 2 deleted.")
+
+note = input(
+    "\nAdd your match reflection note: "
+)
+
+
+update_note(
+    1,
+    note
+)

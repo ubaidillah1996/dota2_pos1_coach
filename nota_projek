@@ -66,3 +66,10 @@
 # flow terjadi :
 # enemy player - check hero roles - identify core - threat analysis - items suggestion
 
+| CRUD   | Function                 |
+| ------ | ------------------------ |
+| Create | Save match analysis      |
+| Read   | View match history       |
+| Update | Update player reflection |
+| Delete | Remove old analysis      |
+
