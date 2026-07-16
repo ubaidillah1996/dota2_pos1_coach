@@ -1,7 +1,8 @@
 # DOTA POS 1 COACH
 # GUI Layer (Tkinter)
-
 import tkinter as tk
+from tkinter import messagebox
+
 
 from services import (
     prepare_match_data,
@@ -26,24 +27,69 @@ def display_analysis_result(analysis):
     benchmark = analysis["benchmark"]
 
 
+    hero_id = player["hero_id"]
+
+    gpm = player["gold_per_min"]
+
+    xpm = player["xp_per_min"]
+
+    networth = player["net_worth"]
+
+    hero_damage = player["hero_damage"]
+
+    tower_damage = player["tower_damage"]
+
+
     output = f"""
 ================================
         DOTA POS 1 COACH
 ================================
 
 
-PLAYER
+PLAYER PROFILE
+--------------
+
+Name:
 {player.get("personaname")}
 
+Hero ID:
+{hero_id}
 
-FARMING ANALYSIS
-----------------
+
+
+ECONOMY
+-------
 
 Last Hits:
 {farming["last_hits"]}
 
 LH/min:
 {farming["lh_per_min"]}
+
+GPM:
+{gpm}
+
+XPM:
+{xpm}
+
+Net Worth:
+{networth}
+
+
+
+COMBAT
+------
+
+Hero Damage:
+{hero_damage}
+
+Tower Damage:
+{tower_damage}
+
+
+
+FARMING ANALYSIS
+----------------
 
 Rating:
 {farming["rating"]}
@@ -106,28 +152,64 @@ Status:
         tk.END,
         output
     )
-
 # =========================
 # BUTTON FUNCTION
 # =========================
 
 def analyse_match():
 
-    match_id = int(
-        match_entry.get()
-    )
+    try:
+
+        match_id = int(match_entry.get())
+
+    except ValueError:
+
+        messagebox.showerror(
+            "Error",
+            "Match ID must be a number."
+        )
+
+        return
+
 
     hero = hero_entry.get().strip().lower()
 
 
-    result = prepare_match_data(
+    if not hero:
+
+        messagebox.showerror(
+            "Error",
+            "Please enter Hero Name."
+        )
+
+        return
+
+
+    try:
+
+        result = prepare_match_data(
         match_id
-    )
+        )
+
+    except Exception as e:
+
+        print("SYSTEM ERROR:", e)
+
+        messagebox.showerror(
+            "Error",
+            "Unable to analyse match."
+        )
+
+        return
 
 
     if result is None:
 
-        print("Match not found")
+        messagebox.showerror(
+            "Error",
+            "Match not found."
+        )
+
         return
 
 
@@ -140,65 +222,24 @@ def analyse_match():
         hero
     )
 
-    print("SEARCH HERO:", hero)
-
-    print("AVAILABLE HERO:")
-
-    for player in data["players"]:
-
-        print(
-        hero_map[player["hero_id"]]
-    )
 
     if player is None:
 
-        print("Player not found")
+        messagebox.showerror(
+            "Error",
+            "Hero not found in this match."
+        )
+
         return
-    
+
+
     analysis = analyse_player(
-    player
+        player
     )
 
-
-    result_box.delete(
-    "1.0",
-    tk.END
-)
-
-
-    output = f"""
-    PLAYER PERFORMANCE
-
-    Player:
-    {player.get('personaname')}
-
-    Hero:
-    {hero.title()}
-
-    KDA:
-    {player['kills']} / {player['deaths']} / {player['assists']}
-
-    Last Hits:
-    {player['last_hits']}
-
-    GPM:
-    {player['gold_per_min']}
-
-    XPM:
-    {player['xp_per_min']}
-
-    Net Worth:
-    {player['net_worth']}
-    """
-
-
-    result_box.insert(
-    tk.END,
-    output
-    )
 
     display_analysis_result(
-    analysis
+        analysis
     )
 
 # =========================
@@ -253,6 +294,47 @@ match_entry.pack(
 )
 
 
+
+# =========================
+# HERO INPUT
+# =========================
+
+hero_label = tk.Label(
+    root,
+    text="Carry Hero"
+)
+
+hero_label.pack()
+
+
+hero_entry = tk.Entry(
+    root,
+    width=40
+)
+
+hero_entry.pack(
+    pady=10
+)
+
+
+
+
+# =========================
+# ANALYSE BUTTON
+# =========================
+
+analyse_button = tk.Button(
+    root,
+    text="Analyse Match",
+    command=analyse_match,
+    font=("Consolas",12,"bold"),
+    width=20
+)
+
+analyse_button.pack(
+    pady=20
+)
+
 # =========================
 # RESULT DISPLAY
 # =========================
@@ -290,42 +372,8 @@ scrollbar.config(
     command=result_box.yview
 )
 
-
-# =========================
-# HERO INPUT
-# =========================
-
-hero_label = tk.Label(
-    root,
-    text="Carry Hero"
-)
-
-hero_label.pack()
-
-
-hero_entry = tk.Entry(
-    root,
-    width=40
-)
-
-hero_entry.pack(
-    pady=10
-)
-
-
-
-# =========================
-# ANALYSE BUTTON
-# =========================
-
-analyse_button = tk.Button(
-    root,
-    text="Analyse Match",
-    command=analyse_match
-)
-
-analyse_button.pack(
-    pady=20
+result_box.config(
+    yscrollcommand=scrollbar.set
 )
 
 
@@ -333,8 +381,6 @@ analyse_button.pack(
 # =========================
 # START APP
 # =========================
-
-root.mainloop()
 
 def clear_result():
 
@@ -350,3 +396,6 @@ clear_button = tk.Button(
 )
 
 clear_button.pack()
+
+root.mainloop()
+
