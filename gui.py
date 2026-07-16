@@ -26,6 +26,21 @@ def display_analysis_result(analysis):
 
     benchmark = analysis["benchmark"]
 
+    gpm = player["gold_per_min"]
+
+    xpm = player["xp_per_min"]
+
+    networth = player["net_worth"]
+
+    hero_damage = player["hero_damage"]
+
+    tower_damage = player["tower_damage"]
+
+    duration = round(player["duration"] / 60, 1)
+
+    level = player["level"]
+
+    result = "WIN" if player["win"] == 1 else "LOSS"
 
     hero_id = player["hero_id"]
 
@@ -39,18 +54,40 @@ def display_analysis_result(analysis):
 
     tower_damage = player["tower_damage"]
 
-
     output = f"""
 ================================
         DOTA POS 1 COACH
 ================================
 
-
-PLAYER PROFILE
---------------
+PLAYER
+----------------
 
 Name:
 {player.get("personaname")}
+
+Match Duration:
+{duration} minutes
+
+Level:
+{level}
+
+Result:
+{result}
+
+GPM:
+{gpm}
+
+XPM:
+{xpm}
+
+Net Worth:
+{networth}
+
+Hero Damage:
+{hero_damage}
+
+Tower Damage:
+{tower_damage}
 
 PLAYER PERFORMANCE
 ------------------
