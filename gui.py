@@ -52,6 +52,27 @@ PLAYER PROFILE
 Name:
 {player.get("personaname")}
 
+PLAYER PERFORMANCE
+------------------
+
+Hero ID:
+{hero_id}
+
+GPM:
+{gpm}
+
+XPM:
+{xpm}
+
+Net Worth:
+{networth}
+
+Hero Damage:
+{hero_damage}
+
+Tower Damage:
+{tower_damage}
+
 Hero ID:
 {hero_id}
 
@@ -237,6 +258,7 @@ def analyse_match():
         player
     )
 
+    print(analysis)
 
     display_analysis_result(
         analysis

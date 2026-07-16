@@ -124,20 +124,20 @@ def kda_analysis(player):
 
     return {
 
-    "kills": kills,
+        "kills": kills,
 
-    "deaths": deaths,
+        "deaths": deaths,
 
-    "assists": assists,
+        "assists": assists,
 
-    "ratio": round(kda_ratio,2),
+        "ratio": round(kda_ratio,2),
 
-    "rating": rating,
+        "rating": rating,
 
-    "insight": insight
+        "insight": insight
 
     }
-
+    
     # problem muncul : space atau jarak. solusi : CTR + A , lepas tu SHIFT + ALTERNATE + F untuk auto format indentation.
 
 def display_items(player, item_map):
