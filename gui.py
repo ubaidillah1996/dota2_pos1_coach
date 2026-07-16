@@ -28,6 +28,8 @@ def display_analysis_result(analysis):
 
     items = analysis["items"]
 
+    coach_report = analysis["coach_report"]
+
     gpm = player["gold_per_min"]
 
     xpm = player["xp_per_min"]
@@ -170,7 +172,20 @@ Rating:
 Insight:
 {kda["insight"]}
 
+COACH INSIGHT
+-------------
 
+"""
+
+
+    for insight in coach_report:
+
+        output += f"""
+- {insight}
+"""
+
+
+    output += """
 
 BENCHMARK RESULT
 ----------------

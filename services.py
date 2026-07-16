@@ -93,11 +93,17 @@ def analyse_player(player, item_map):
         item_map
     )
 
+    coach_report = generate_coach_report(
+    farming,
+    kda,
+    benchmark
+    )
 
     return {
         "player": player,
         "farming": farming,
         "kda": kda,
         "benchmark": benchmark,
-        "items": items
+        "items": items,
+        "coach_report": coach_report
     }

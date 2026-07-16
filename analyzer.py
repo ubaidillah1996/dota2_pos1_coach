@@ -435,90 +435,90 @@ def benchmark_analysis(player):
     #     }
     # }
 
-def generate_coach_report(performance, player):
+# def generate_coach_report(performance, player):
 
-    print("\n================================")
-    print("       DOTA POS 1 COACH")
-    print("================================")
-
-
-    print("\n====== PERFORMANCE SUMMARY ======")
+#     print("\n================================")
+#     print("       DOTA POS 1 COACH")
+#     print("================================")
 
 
-    for metric, data in performance.items():
-
-        print("\n" + metric)
-
-        print(
-            "Your:",
-            data["player"]
-        )
-
-        print(
-            "Benchmark:",
-            data["benchmark"]
-        )
-
-        print(
-            "Difference:",
-            data["difference"]
-        )
-
-        print(
-            "Status:",
-            data["status"]
-        )
+#     print("\n====== PERFORMANCE SUMMARY ======")
 
 
-    print("\n====== COACH INSIGHT ======")
+#     for metric, data in performance.items():
+
+#         print("\n" + metric)
+
+#         print(
+#             "Your:",
+#             data["player"]
+#         )
+
+#         print(
+#             "Benchmark:",
+#             data["benchmark"]
+#         )
+
+#         print(
+#             "Difference:",
+#             data["difference"]
+#         )
+
+#         print(
+#             "Status:",
+#             data["status"]
+#         )
 
 
-    # Farming insight
-
-    if performance["Farming"]["status"] == "Above Average":
-
-        print(
-            "✓ Strong farming efficiency"
-        )
-
-    else:
-
-        print(
-            "✗ Farming needs improvement"
-        )
+    # print("\n====== COACH INSIGHT ======")
 
 
-    # Gold insight
+    # # Farming insight
 
-    if performance["Gold"]["status"] == "Above Average":
+    # if performance["Farming"]["status"] == "Above Average":
 
-        print(
-            "✓ Good gold accumulation"
-        )
+    #     print(
+    #         "✓ Strong farming efficiency"
+    #     )
 
-    else:
+    # else:
 
-        print(
-            "✗ Need better gold generation"
-        )
+    #     print(
+    #         "✗ Farming needs improvement"
+    #     )
+
+
+    # # Gold insight
+
+    # if performance["Gold"]["status"] == "Above Average":
+
+    #     print(
+    #         "✓ Good gold accumulation"
+    #     )
+
+    # else:
+
+    #     print(
+    #         "✗ Need better gold generation"
+        # )
 
 
     # Death analysis
 
-    deaths = player["deaths"]
+    # deaths = player["deaths"]
 
 
-    if deaths > 8:
+    # if deaths > 8:
 
-        print(
-            "✗ High death count. Improve positioning."
-        )
+    #     print(
+    #         "✗ High death count. Improve positioning."
+    #     )
 
-    else:
+    # else:
 
-        print(
-            "✓ Good survival"
-        )
+    #     print(
+    #         "✓ Good survival"
+    #     )
 
 def item_analysis(player, item_map):
 
@@ -554,3 +554,42 @@ def item_analysis(player, item_map):
     return {
         "items": items
     }
+
+def generate_coach_report(
+    farming,
+    kda,
+    benchmark
+):
+
+    report = []
+
+
+    if farming["rating"] == "Excellent":
+
+        report.append(
+            "Strong farming efficiency. Gold accumulation is good."
+        )
+
+
+    if kda["deaths"] >= 6:
+
+        report.append(
+            "Death count is high. Improve positioning and fight selection."
+        )
+
+
+    if benchmark["Gold"]["status"] == "Needs Improvement":
+
+        report.append(
+            "Gold income below benchmark. Prioritize farming efficiency."
+        )
+
+
+    if benchmark["Farming"]["status"] == "Above Average":
+
+        report.append(
+            "Farming performance is above average."
+        )
+
+
+    return report
