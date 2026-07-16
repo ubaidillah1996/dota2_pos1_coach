@@ -5,7 +5,8 @@ import tkinter as tk
 
 from services import (
     prepare_match_data,
-    get_target_player
+    get_target_player,
+    analyse_player
 )
 
 
@@ -56,6 +57,10 @@ def analyse_match():
 
         print("Player not found")
         return
+    
+    analysis = analyse_player(
+    player
+    )
 
 
     result_box.delete(
@@ -95,6 +100,7 @@ def analyse_match():
     output
     )
 
+    print(analysis)
 
 
 # =========================

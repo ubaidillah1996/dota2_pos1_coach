@@ -41,33 +41,55 @@ def display_performance(player):
     print("Hero Damage:", player["hero_damage"])
     print("Tower Damage:", player["tower_damage"])
 
-def farming_analysis(player): # function baru : farming analisis
-        
-        duration_minutes = player["duration"] /60
+def farming_analysis(player):
 
-        lh_per_min = player["last_hits"] / duration_minutes
+    duration_minutes = player["duration"] / 60
 
-        print("\n ======= FARMING ANALYSIS========")
-
-        print("Last Hits:", player["last_hits"])
-        print("Match Duration:", round(duration_minutes,1), "minutes")
-        print("LH/Min:", round(lh_per_min,2 ))
+    lh_per_min = player["last_hits"] / duration_minutes
 
 
-        if lh_per_min >= 8:
-             rating = "Excellent"
-             insight = "Strong farming efficiency, Good gold accumulation"
+    print("\n ======= FARMING ANALYSIS========")
 
-        elif lh_per_min >=6:
-             rating = "Good"
-             insight = "Decent farming, but can improve lane efficiency"
+    print("Last Hits:", player["last_hits"])
+    print("Match Duration:", round(duration_minutes,1), "minutes")
+    print("LH/Min:", round(lh_per_min,2))
 
-        else:
-             rating = "Need Improvement"
-             insight = "Farming efficency is low. Focus on lane control and creep priority"
-        
-        print("Rating:", rating)
-        print("Insight:", insight)
+
+    if lh_per_min >= 8:
+
+        rating = "Excellent"
+        insight = "Strong farming efficiency, Good gold accumulation"
+
+
+    elif lh_per_min >= 6:
+
+        rating = "Good"
+        insight = "Decent farming, but can improve lane efficiency"
+
+
+    else:
+
+        rating = "Need Improvement"
+        insight = "Farming efficiency is low. Focus on lane control and creep priority"
+
+
+    print("Rating:", rating)
+    print("Insight:", insight)
+
+
+    return {
+
+        "last_hits": player["last_hits"],
+
+        "duration": round(duration_minutes,1),
+
+        "lh_per_min": round(lh_per_min,2),
+
+        "rating": rating,
+
+        "insight": insight
+
+    }
 
 def kda_analysis(player):
 
@@ -99,6 +121,22 @@ def kda_analysis(player):
 
     print("Rating:", rating)
     print("Insight:", insight)
+
+    return {
+
+    "kills": kills,
+
+    "deaths": deaths,
+
+    "assists": assists,
+
+    "ratio": round(kda_ratio,2),
+
+    "rating": rating,
+
+    "insight": insight
+
+    }
 
     # problem muncul : space atau jarak. solusi : CTR + A , lepas tu SHIFT + ALTERNATE + F untuk auto format indentation.
 

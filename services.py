@@ -6,7 +6,13 @@ from api import (
     get_heroes,
     get_items
 )
-from analyzer import find_player_by_hero
+from analyzer import (
+    find_player_by_hero,
+    farming_analysis,
+    kda_analysis,
+    benchmark_analysis,
+    generate_coach_report
+)
 
 
 
@@ -63,3 +69,28 @@ def get_target_player(
     )
 
     return player
+
+def analyse_player(player):
+
+
+    farming = farming_analysis(
+        player
+    )
+
+
+    kda = kda_analysis(
+        player
+    )
+
+
+    benchmark = benchmark_analysis(
+        player
+    )
+
+
+    return {
+        "player": player,
+        "farming": farming,
+        "kda": kda,
+        "benchmark": benchmark
+    }
