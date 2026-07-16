@@ -13,7 +13,8 @@ from analyzer import (
     benchmark_analysis,
     generate_coach_report,
     item_analysis,
-    item_insight
+    item_insight,
+    performance_summary
 )
 
 
@@ -98,6 +99,13 @@ def analyse_player(player, item_map):
         items["items"]
     )
 
+    summary = performance_summary(
+        player,
+        farming,
+        kda,
+        benchmark
+    )
+
     coach_report = generate_coach_report(
     farming,
     kda,
@@ -111,5 +119,6 @@ def analyse_player(player, item_map):
         "benchmark": benchmark,
         "items": items,
         "coach_report": coach_report,
-        "item_insight": item_insights
+        "item_insight": item_insights,
+        "summary": summary
     }

@@ -32,6 +32,8 @@ def display_analysis_result(analysis):
 
     item_insight = analysis["item_insight"]
 
+    summary = analysis["summary"]
+
     gpm = player["gold_per_min"]
 
     xpm = player["xp_per_min"]
@@ -123,6 +125,45 @@ Hero Damage:
 Tower Damage:
 {tower_damage}
 
+
+
+PERFORMANCE SUMMARY
+-------------------
+
+Overall:
+{summary["overall"]}
+
+
+
+STRENGTHS
+---------
+
+"""
+
+
+    for strength in summary["strengths"]:
+
+        output += f"""
+- {strength}
+"""
+
+
+    output += """
+
+WEAKNESSES
+-----------
+
+"""
+
+
+    for weakness in summary["weaknesses"]:
+
+        output += f"""
+- {weakness}
+"""
+
+
+    output += f"""
 
 
 ITEM ANALYSIS

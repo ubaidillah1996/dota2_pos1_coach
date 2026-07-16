@@ -628,3 +628,58 @@ def item_insight(items):
 
 
     return insights
+
+def performance_summary(
+    player,
+    farming,
+    kda,
+    benchmark
+):
+
+    strengths = []
+
+    weaknesses = []
+
+
+    if farming["rating"] == "Excellent":
+
+        strengths.append(
+            "Excellent farming efficiency."
+        )
+
+
+    if kda["deaths"] >= 6:
+
+        weaknesses.append(
+            "High death count. Improve positioning."
+        )
+
+
+    if benchmark["Gold"]["status"] == "Needs Improvement":
+
+        weaknesses.append(
+            "Gold income below benchmark."
+        )
+
+
+    if benchmark["Farming"]["status"] == "Above Average":
+
+        strengths.append(
+            "Farming performance above average."
+        )
+
+
+    if len(strengths) >= len(weaknesses):
+
+        overall = "Good Carry Performance"
+
+    else:
+
+        overall = "Needs Improvement"
+
+
+    return {
+        "overall": overall,
+        "strengths": strengths,
+        "weaknesses": weaknesses
+    }
