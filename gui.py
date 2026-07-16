@@ -28,6 +28,8 @@ def display_analysis_result(analysis):
 
     items = analysis["items"]
 
+    recommendations = analysis["recommendations"]
+
     coach_report = analysis["coach_report"]
 
     item_insight = analysis["item_insight"]
@@ -238,6 +240,21 @@ COACH INSIGHT
 
         output += f"""
 - {insight}
+"""
+
+
+    output += """
+
+COACH RECOMMENDATION
+--------------------
+
+"""
+
+
+    for recommendation in recommendations:
+
+        output += f"""
+- {recommendation}
 """
 
 
