@@ -593,3 +593,38 @@ def generate_coach_report(
 
 
     return report
+
+def item_insight(items):
+
+    insights = []
+
+
+    if "Black King Bar" in items:
+
+        insights.append(
+            "BKB detected. Good defensive choice against magic damage."
+        )
+
+
+    if "Satanic" in items:
+
+        insights.append(
+            "Satanic detected. Strong late game survivability."
+        )
+
+
+    if "Daedalus" in items:
+
+        insights.append(
+            "Daedalus detected. High critical damage potential."
+        )
+
+
+    if not insights:
+
+        insights.append(
+            "No major item pattern detected."
+        )
+
+
+    return insights

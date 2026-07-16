@@ -30,6 +30,8 @@ def display_analysis_result(analysis):
 
     coach_report = analysis["coach_report"]
 
+    item_insight = analysis["item_insight"]
+
     gpm = player["gold_per_min"]
 
     xpm = player["xp_per_min"]
@@ -138,7 +140,20 @@ ITEM ANALYSIS
 
     output += f"""
 
+ITEM INSIGHT
+-------------
 
+"""
+
+
+    for insight in item_insight:
+
+        output += f"""
+- {insight}
+"""
+
+
+    output += f"""
 
 FARMING ANALYSIS
 ----------------
