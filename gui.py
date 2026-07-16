@@ -46,22 +46,22 @@ def display_analysis_result(analysis):
 
     hero_id = player["hero_id"]
 
-    gpm = player["gold_per_min"]
+    gpm = f"{player['gold_per_min']:,}"
 
-    xpm = player["xp_per_min"]
+    xpm = f"{player['xp_per_min']:,}"
 
-    networth = player["net_worth"]
+    networth = f"{player['net_worth']:,}"
 
-    hero_damage = player["hero_damage"]
+    hero_damage = f"{player['hero_damage']:,}"
 
-    tower_damage = player["tower_damage"]
+    tower_damage = f"{player['tower_damage']:,}"
 
     output = f"""
 ================================
         DOTA POS 1 COACH
 ================================
 
-PLAYER
+PLAYER SUMMARY
 ----------------
 
 Name:
@@ -91,32 +91,6 @@ Hero Damage:
 Tower Damage:
 {tower_damage}
 
-PLAYER PERFORMANCE
-------------------
-
-Hero ID:
-{hero_id}
-
-GPM:
-{gpm}
-
-XPM:
-{xpm}
-
-Net Worth:
-{networth}
-
-Hero Damage:
-{hero_damage}
-
-Tower Damage:
-{tower_damage}
-
-Hero ID:
-{hero_id}
-
-
-
 ECONOMY
 -------
 
@@ -136,7 +110,6 @@ Net Worth:
 {networth}
 
 
-
 COMBAT
 ------
 
@@ -145,6 +118,23 @@ Hero Damage:
 
 Tower Damage:
 {tower_damage}
+
+
+
+ITEM ANALYSIS
+-------------
+
+"""
+
+
+    for item in items["items"]:
+
+        output += f"""
+- {item}
+"""
+
+
+    output += f"""
 
 
 
@@ -208,21 +198,6 @@ Status:
 
 """
 
-
-    
-
-    output += """
-
-ITEM ANALYSIS
--------------
-"""
-
-    for item in items["items"]:
-
-        output += f"""
-{item}
-"""
-        
     result_box.insert(
         tk.END,
         output
