@@ -683,3 +683,43 @@ def performance_summary(
         "strengths": strengths,
         "weaknesses": weaknesses
     }
+
+def generate_recommendation(
+    farming,
+    kda,
+    benchmark,
+    items
+):
+
+    recommendations = []
+
+
+    if farming["lh_per_min"] >= 8:
+
+        recommendations.append(
+            "Maintain farming pattern. Your gold accumulation is strong."
+        )
+
+
+    if kda["deaths"] >= 5:
+
+        recommendations.append(
+            "Reduce unnecessary fights. Focus on safer positioning."
+        )
+
+
+    if benchmark["Gold"]["status"] == "Needs Improvement":
+
+        recommendations.append(
+            "Improve GPM by increasing farming efficiency."
+        )
+
+
+    if "Black King Bar" not in items["items"]:
+
+        recommendations.append(
+            "Consider defensive items when enemy has strong magic damage."
+        )
+
+
+    return recommendations

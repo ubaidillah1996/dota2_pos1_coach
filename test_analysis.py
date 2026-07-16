@@ -1,25 +1,32 @@
-from services import analyse_player
+from services import (
+    prepare_match_data,
+    get_target_player,
+    analyse_player
+)
 
 
-player = {
-
-    "personaname": "Test Player",
-
-    "kills": 10,
-    "deaths": 3,
-    "assists": 8,
-
-    "last_hits": 300,
-    "duration": 1800,
-
-    "gold_per_min": 600,
-    "xp_per_min": 700,
-
-    "net_worth": 20000
-}
+match_id = 8872864614
 
 
-result = analyse_player(player)
+result = prepare_match_data(
+    match_id
+)
+
+
+data, hero_map, item_map = result
+
+
+player = get_target_player(
+    data,
+    hero_map,
+    "sven"
+)
+
+
+result = analyse_player(
+    player,
+    item_map
+)
 
 
 print(result)
