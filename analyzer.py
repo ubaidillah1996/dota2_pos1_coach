@@ -782,3 +782,72 @@ def generate_recommendation(
 
 
     return recommendations
+
+def match_result_analysis(
+    player,
+    farming,
+    kda,
+    benchmark
+):
+
+    result = []
+
+
+    if player["win"] == 1:
+
+        result.append(
+            "Victory achieved. Good execution during the match."
+        )
+
+    else:
+
+        result.append(
+            "Loss detected. Reviewing performance weaknesses."
+        )
+
+
+    # Farming evaluation
+
+    if farming["rating"] == "Excellent":
+
+        result.append(
+            "Farming performance was strong."
+        )
+
+
+    elif farming["rating"] == "Average":
+
+        result.append(
+            "Farming efficiency can be improved."
+        )
+
+
+    # Death evaluation
+
+    if kda["deaths"] >= 5:
+
+        result.append(
+            "High death count reduced overall impact."
+        )
+
+
+    # Objective evaluation
+
+    if player["tower_damage"] < 1000:
+
+        result.append(
+            "Objective contribution was low. Focus more on pushing after winning fights."
+        )
+
+
+    # Gold conversion
+
+    if benchmark["Gold"]["status"] == "Needs Improvement":
+
+        result.append(
+            "Gold advantage was not maximized. Improve farming consistency."
+        )
+
+
+    return result
+    

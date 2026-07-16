@@ -16,6 +16,7 @@ from analyzer import (
     item_insight,
     performance_summary,
     generate_recommendation,
+    match_result_analysis
 )
 
 
@@ -75,6 +76,7 @@ def get_target_player(
 
 def analyse_player(player, item_map):
 
+    match_result_analysis,
 
     farming = farming_analysis(
         player
@@ -114,6 +116,20 @@ def analyse_player(player, item_map):
         items
     )
 
+    match_result = match_result_analysis(
+        player,
+        farming,
+        kda,
+        benchmark
+    )
+
+    match_result = match_result_analysis(
+        player,
+        farming,
+        kda,
+        benchmark
+    )
+
     coach_report = generate_coach_report(
     farming,
     kda,
@@ -129,5 +145,6 @@ def analyse_player(player, item_map):
         "coach_report": coach_report,
         "item_insight": item_insights,
         "summary": summary,
-        "recommendations": recommendations
+        "recommendations": recommendations,
+        "match_result": match_result
     }

@@ -30,6 +30,8 @@ def display_analysis_result(analysis):
 
     recommendations = analysis["recommendations"]
 
+    match_result = analysis["match_result"]
+
     coach_report = analysis["coach_report"]
 
     item_insight = analysis["item_insight"]
@@ -255,6 +257,21 @@ COACH RECOMMENDATION
 
         output += f"""
 - {recommendation}
+"""
+
+
+    output += """
+
+MATCH RESULT ANALYSIS
+---------------------
+
+"""
+
+
+    for result in match_result:
+
+        output += f"""
+- {result}
 """
 
 
