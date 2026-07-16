@@ -211,9 +211,7 @@ root.title(
     "DOTA POS 1 COACH"
 )
 
-root.geometry(
-    "800x600"
-)
+root.geometry("900x700")
 
 
 
@@ -224,7 +222,7 @@ root.geometry(
 title = tk.Label(
     root,
     text="DOTA POS 1 COACH",
-    font=("Arial", 20)
+    font=("Consolas",20,"bold")
 )
 
 title.pack(
@@ -259,14 +257,37 @@ match_entry.pack(
 # RESULT DISPLAY
 # =========================
 
+result_frame = tk.Frame(root)
+
+result_frame.pack(
+    pady=20
+)
+
+
+scrollbar = tk.Scrollbar(
+    result_frame
+)
+
+scrollbar.pack(
+    side=tk.RIGHT,
+    fill=tk.Y
+)
+
+
 result_box = tk.Text(
-    root,
-    height=15,
-    width=70
+    result_frame,
+    height=25,
+    width=90,
+    font=("Consolas", 11)
 )
 
 result_box.pack(
-    pady=20
+    side=tk.LEFT
+)
+
+
+scrollbar.config(
+    command=result_box.yview
 )
 
 
@@ -314,3 +335,18 @@ analyse_button.pack(
 # =========================
 
 root.mainloop()
+
+def clear_result():
+
+    result_box.delete(
+        "1.0",
+        tk.END
+    )
+
+clear_button = tk.Button(
+    root,
+    text="Clear",
+    command=clear_result
+)
+
+clear_button.pack()
