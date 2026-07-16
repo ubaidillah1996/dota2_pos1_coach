@@ -723,3 +723,62 @@ def generate_recommendation(
 
 
     return recommendations
+
+def generate_recommendation(
+    farming,
+    kda,
+    benchmark,
+    items
+):
+
+    recommendations = []
+
+
+    # Farming
+    if farming["rating"] == "Excellent":
+
+        recommendations.append(
+            "Maintain farming pattern. Your last hit efficiency is strong."
+        )
+
+
+    elif farming["rating"] == "Average":
+
+        recommendations.append(
+            "Improve farming efficiency. Focus on lane creeps and safe farming."
+        )
+
+
+    # Death
+    if kda["deaths"] >= 5:
+
+        recommendations.append(
+            "Reduce unnecessary fights. Improve positioning and fight selection."
+        )
+
+
+    # Gold
+    if benchmark["Gold"]["status"] == "Needs Improvement":
+
+        recommendations.append(
+            "Increase GPM by maximizing farming time before joining fights."
+        )
+
+
+    # KDA
+    if benchmark["KDA"]["status"] == "Needs Improvement":
+
+        recommendations.append(
+            "Improve team fight timing. Join fights when core items are ready."
+        )
+
+
+    # Item
+    if "Black King Bar" in items["items"]:
+
+        recommendations.append(
+            "Good defensive item choice. Use BKB timing carefully during fights."
+        )
+
+
+    return recommendations
