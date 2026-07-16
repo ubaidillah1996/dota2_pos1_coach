@@ -11,7 +11,8 @@ from analyzer import (
     farming_analysis,
     kda_analysis,
     benchmark_analysis,
-    generate_coach_report
+    generate_coach_report,
+    item_analysis
 )
 
 
@@ -46,9 +47,8 @@ def prepare_match_data(match_id):
         if "id" in item_data and "dname" in item_data:
 
             item_map[
-                item_data["id"]
+                str(item_data["id"])
             ] = item_data["dname"]
-
 
     return (
         data,
@@ -70,7 +70,7 @@ def get_target_player(
 
     return player
 
-def analyse_player(player):
+def analyse_player(player, item_map):
 
 
     farming = farming_analysis(
@@ -88,9 +88,16 @@ def analyse_player(player):
     )
 
 
+    items = item_analysis(
+        player,
+        item_map
+    )
+
+
     return {
         "player": player,
         "farming": farming,
         "kda": kda,
-        "benchmark": benchmark
+        "benchmark": benchmark,
+        "items": items
     }

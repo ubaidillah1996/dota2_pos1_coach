@@ -292,8 +292,11 @@ def analyse_match():
 
 
     analysis = analyse_player(
-        player
+        player,
+        item_map
     )
+
+    print(analysis["items"])
 
     print(analysis)
 

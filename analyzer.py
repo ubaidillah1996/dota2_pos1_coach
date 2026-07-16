@@ -519,3 +519,38 @@ def generate_coach_report(performance, player):
         print(
             "✓ Good survival"
         )
+
+def item_analysis(player, item_map):
+
+    items = []
+
+    item_slots = [
+        "item_0",
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+    ]
+
+
+    for slot in item_slots:
+
+        item_id = player.get(slot)
+
+
+        if item_id and item_id != 0:
+
+            item_name = item_map.get(
+                str(item_id),
+                "Unknown Item"
+            )
+
+            items.append(
+                item_name
+            )
+
+
+    return {
+        "items": items
+    }
