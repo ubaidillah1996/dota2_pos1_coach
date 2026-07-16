@@ -9,6 +9,103 @@ from services import (
     analyse_player
 )
 
+def display_analysis_result(analysis):
+
+    result_box.delete(
+        "1.0",
+        tk.END
+    )
+
+
+    player = analysis["player"]
+
+    farming = analysis["farming"]
+
+    kda = analysis["kda"]
+
+    benchmark = analysis["benchmark"]
+
+
+    output = f"""
+================================
+        DOTA POS 1 COACH
+================================
+
+
+PLAYER
+{player.get("personaname")}
+
+
+FARMING ANALYSIS
+----------------
+
+Last Hits:
+{farming["last_hits"]}
+
+LH/min:
+{farming["lh_per_min"]}
+
+Rating:
+{farming["rating"]}
+
+Insight:
+{farming["insight"]}
+
+
+
+KDA ANALYSIS
+------------
+
+Kills:
+{kda["kills"]}
+
+Deaths:
+{kda["deaths"]}
+
+Assists:
+{kda["assists"]}
+
+KDA Ratio:
+{kda["ratio"]}
+
+Rating:
+{kda["rating"]}
+
+Insight:
+{kda["insight"]}
+
+
+
+BENCHMARK RESULT
+----------------
+"""
+
+
+    for metric, data in benchmark.items():
+
+        output += f"""
+
+{metric}
+
+Performance:
+{data["player"]}
+
+Benchmark:
+{data["benchmark"]}
+
+Difference:
+{data["difference"]}
+
+Status:
+{data["status"]}
+
+"""
+
+
+    result_box.insert(
+        tk.END,
+        output
+    )
 
 # =========================
 # BUTTON FUNCTION
@@ -100,8 +197,9 @@ def analyse_match():
     output
     )
 
-    print(analysis)
-
+    display_analysis_result(
+    analysis
+    )
 
 # =========================
 # MAIN WINDOW
