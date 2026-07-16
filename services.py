@@ -6,22 +6,9 @@ from api import (
     get_heroes,
     get_items
 )
+from analyzer import find_player_by_hero
 
-def prepare_match_data(match_id):
 
-    print("DEBUG 1")
-
-    data = get_match(match_id)
-
-    print("DEBUG 2")
-
-    heroes = get_heroes()
-
-    print("DEBUG 3")
-
-    items = get_items()
-
-    print("DEBUG 4")
 
 def prepare_match_data(match_id):
 
@@ -62,3 +49,17 @@ def prepare_match_data(match_id):
         hero_map,
         item_map
     )
+
+def get_target_player(
+    data,
+    hero_map,
+    target_hero
+):
+
+    player = find_player_by_hero(
+        data["players"],
+        hero_map,
+        target_hero
+    )
+
+    return player

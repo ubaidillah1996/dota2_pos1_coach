@@ -128,7 +128,6 @@ print("\n=== HERO DALAM MATCH ===")
 for p in data["players"]:
     print(hero_map[p["hero_id"]])
 
-print("PLAYER CHECK:")
 print(player)
 
 display_performance(player)
@@ -209,8 +208,6 @@ for enemy in enemy_players:
 
 ## problems : OpenDota API returns hero information as hero_id instead of hero name.
 ## solutions : Created hero mapping dictionary to convert hero_id into readable hero name.
-
-print("\n====== ANALYSIS HISTORY ======")
 
 history = view_history()
 

@@ -11,7 +11,6 @@
 from api import get_match, get_heroes, get_items
 
 from analyzer import (
-    find_player_by_hero,
     display_performance,
     farming_analysis,
     kda_analysis,
@@ -38,7 +37,8 @@ from database import (
     check_existing_analysis,
 )
 from services import (
-    prepare_match_data
+    prepare_match_data,
+    get_target_player
 )
 
 
@@ -108,13 +108,11 @@ def analyse_match():
     
     ### FINDING PLAYER HERO
 
-    
-
-    player = find_player_by_hero(
-        data["players"],
+    player = get_target_player(
+        data,
         hero_map,
         target_hero
-        )
+    )
 
     if player is None:
 
