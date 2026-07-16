@@ -26,6 +26,8 @@ def display_analysis_result(analysis):
 
     benchmark = analysis["benchmark"]
 
+    items = analysis["items"]
+
     gpm = player["gold_per_min"]
 
     xpm = player["xp_per_min"]
@@ -185,6 +187,7 @@ BENCHMARK RESULT
 """
 
 
+
     for metric, data in benchmark.items():
 
         output += f"""
@@ -206,10 +209,25 @@ Status:
 """
 
 
+    
+
+    output += """
+
+ITEM ANALYSIS
+-------------
+"""
+
+    for item in items["items"]:
+
+        output += f"""
+{item}
+"""
+        
     result_box.insert(
         tk.END,
         output
     )
+
 # =========================
 # BUTTON FUNCTION
 # =========================
