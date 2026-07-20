@@ -10,6 +10,12 @@ from services import (
     analyse_player
 )
 
+from database import (
+    view_history,
+    update_note,
+    delete_analysis
+)
+
 def display_analysis_result(analysis):
 
     result_box.delete(
@@ -391,7 +397,9 @@ def analyse_match():
 
     analysis = analyse_player(
         player,
-        item_map
+        item_map,
+        match_id,
+        hero
     )
 
     print(analysis["items"])
@@ -476,7 +484,47 @@ hero_entry.pack(
     pady=10
 )
 
+# =========================
+# RECORD ID INPUT
+# =========================
 
+record_label = tk.Label(
+    root,
+    text="History Record ID"
+)
+
+record_label.pack()
+
+
+record_id_entry = tk.Entry(
+    root,
+    width=20
+)
+
+record_id_entry.pack(
+    pady=5
+)
+
+# =========================
+# NOTE INPUT
+# =========================
+
+note_label = tk.Label(
+    root,
+    text="Personal Note"
+)
+
+note_label.pack()
+
+
+note_entry = tk.Entry(
+    root,
+    width=60
+)
+
+note_entry.pack(
+    pady=10
+)
 
 
 # =========================
@@ -536,11 +584,153 @@ result_box.config(
     yscrollcommand=scrollbar.set
 )
 
+def show_history():
+
+    records = view_history()
 
 
-# =========================
-# START APP
-# =========================
+    result_box.delete(
+        "1.0",
+        tk.END
+    )
+
+
+    output = """
+==============================
+        MATCH HISTORY
+==============================
+
+"""
+
+
+    if not records:
+
+        output += "No analysis history found."
+
+
+    else:
+
+        for record in records:
+
+            output += f"""
+
+ID:
+{record[0]}
+
+Match ID:
+{record[1]}
+
+Hero:
+{record[2]}
+
+Player:
+{record[3]}
+
+KDA:
+{record[4]}
+
+LH/min:
+{record[5]}
+
+GPM:
+{record[6]}
+
+Status:
+{record[7]}
+
+------------------------------
+
+"""
+
+
+    result_box.insert(
+        tk.END,
+        output
+    )
+
+def save_note():
+
+    try:
+
+        record_id = int(
+            record_id_entry.get()
+        )
+
+
+    except ValueError:
+
+        messagebox.showerror(
+            "Error",
+            "Record ID must be a number."
+        )
+
+        return
+
+
+    note = note_entry.get().strip()
+
+
+    if not note:
+
+        messagebox.showerror(
+            "Error",
+            "Please enter a note."
+        )
+
+        return
+
+
+    update_note(
+        record_id,
+        note
+    )
+
+
+    messagebox.showinfo(
+        "Success",
+        "Note updated successfully."
+    )
+
+
+    note_entry.delete(
+        0,
+        tk.END
+    )
+
+def delete_record():
+
+    try:
+
+        record_id = int(
+            record_id_entry.get()
+        )
+
+
+    except ValueError:
+
+        messagebox.showerror(
+            "Error",
+            "Record ID must be a number."
+        )
+
+        return
+
+
+    delete_analysis(
+        record_id
+    )
+
+
+    messagebox.showinfo(
+        "Success",
+        "Analysis deleted successfully."
+    )
+
+
+    record_id_entry.delete(
+        0,
+        tk.END
+    )
 
 def clear_result():
 
@@ -556,6 +746,36 @@ clear_button = tk.Button(
 )
 
 clear_button.pack()
+
+history_button = tk.Button(
+    root,
+    text="View History",
+    command=show_history
+)
+
+history_button.pack(
+    pady=5
+)
+
+save_note_button = tk.Button(
+    root,
+    text="Save Note",
+    command=save_note
+)
+
+save_note_button.pack(
+    pady=5
+)
+
+delete_button = tk.Button(
+    root,
+    text="Delete Analysis",
+    command=delete_record
+)
+
+delete_button.pack(
+    pady=5
+)
 
 root.mainloop()
 

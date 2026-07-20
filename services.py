@@ -18,7 +18,7 @@ from analyzer import (
     generate_recommendation,
     match_result_analysis
 )
-
+from database import save_analysis
 
 
 def prepare_match_data(match_id):
@@ -74,7 +74,12 @@ def get_target_player(
 
     return player
 
-def analyse_player(player, item_map):
+def analyse_player(
+    player,
+    item_map,
+    match_id,
+    hero
+):
 
     match_result_analysis,
 
@@ -134,6 +139,16 @@ def analyse_player(player, item_map):
     farming,
     kda,
     benchmark
+    )
+
+    save_analysis(
+        match_id,
+        hero,
+        player.get("personaname"),
+        kda["ratio"],
+        farming["lh_per_min"],
+        player["gold_per_min"],
+        "WIN" if player["win"] == 1 else "LOSS"
     )
 
     return {
