@@ -467,11 +467,12 @@ def show_progress_graph():
 root = tk.Tk()
 
 root.title(
-    "DOTA POS 1 COACH"
+    "DOTA 2 POS 1 COACH"
 )
 
-root.geometry("900x700")
-
+root.geometry(
+    "1100x800"
+)
 
 
 # =========================
@@ -488,14 +489,37 @@ title.pack(
     pady=20
 )
 
+main_frame = tk.Frame(root)
 
+main_frame.pack(
+    fill=tk.BOTH,
+    expand=True,
+    padx=20,
+    pady=10
+)
 
 # =========================
 # MATCH ID INPUT
 # =========================
 
+input_frame = tk.LabelFrame(
+    main_frame,
+    text="MATCH INPUT",
+    font=("Consolas",12,"bold"),
+    padx=20,
+    pady=10
+)
+
+input_frame.grid(
+    row=0,
+    column=0,
+    padx=20,
+    pady=10,
+    sticky="n"
+)
+
 match_label = tk.Label(
-    root,
+    input_frame,
     text="Match ID"
 )
 
@@ -503,7 +527,7 @@ match_label.pack()
 
 
 match_entry = tk.Entry(
-    root,
+    input_frame,
     width=40
 )
 
@@ -518,7 +542,7 @@ match_entry.pack(
 # =========================
 
 hero_label = tk.Label(
-    root,
+    input_frame,
     text="Carry Hero"
 )
 
@@ -526,7 +550,7 @@ hero_label.pack()
 
 
 hero_entry = tk.Entry(
-    root,
+    input_frame,
     width=40
 )
 
@@ -539,7 +563,7 @@ hero_entry.pack(
 # =========================
 
 record_label = tk.Label(
-    root,
+    input_frame,
     text="History Record ID"
 )
 
@@ -547,7 +571,7 @@ record_label.pack()
 
 
 record_id_entry = tk.Entry(
-    root,
+    input_frame,
     width=20
 )
 
@@ -560,7 +584,7 @@ record_id_entry.pack(
 # =========================
 
 note_label = tk.Label(
-    root,
+    input_frame,
     text="Personal Note"
 )
 
@@ -568,36 +592,52 @@ note_label.pack()
 
 
 note_entry = tk.Entry(
-    root,
-    width=60
+    input_frame,
+    width=40
 )
 
 note_entry.pack(
     pady=10
 )
 
+action_frame = tk.LabelFrame(
+    main_frame,
+    text="ACTIONS",
+    font=("Consolas",12,"bold"),
+    padx=20,
+    pady=10
+)
+
+action_frame.grid(
+    row=0,
+    column=1,
+    padx=20,
+    pady=10,
+    sticky="n"
+)
 
 # =========================
 # ANALYSE BUTTON
 # =========================
 
 analyse_button = tk.Button(
-    root,
+    input_frame,
     text="Analyse Match",
     command=analyse_match,
     font=("Consolas",12,"bold"),
-    width=20
+    width=22
 )
 
 analyse_button.pack(
-    pady=20
+    pady=10
 )
 
 graph_button = tk.Button(
-    root,
+    action_frame,
     text="Performance Graph",
     command=show_performance_graph,
-    font=("Consolas",12)
+    font=("Consolas",12),
+    width=22
 )
 
 graph_button.pack(
@@ -605,10 +645,11 @@ graph_button.pack(
 )
 
 progress_button = tk.Button(
-    root,
+    action_frame,
     text="Improvement Progress",
     command=show_progress_graph,
-    font=("Consolas",12)
+    font=("Consolas",12),
+    width=22
 )
 
 progress_button.pack(
@@ -619,12 +660,37 @@ progress_button.pack(
 # RESULT DISPLAY
 # =========================
 
-result_frame = tk.Frame(root)
-
-result_frame.pack(
-    pady=20
+result_frame = tk.LabelFrame(
+    main_frame,
+    text="ANALYSIS RESULT",
+    font=("Consolas",12,"bold"),
+    padx=10,
+    pady=10
 )
 
+result_frame.grid(
+    row=1,
+    column=0,
+    columnspan=2,
+    padx=20,
+    pady=10,
+    sticky="nsew"
+)
+
+main_frame.grid_rowconfigure(
+    1,
+    weight=1
+)
+
+main_frame.grid_columnconfigure(
+    0,
+    weight=1
+)
+
+main_frame.grid_columnconfigure(
+    1,
+    weight=1
+)
 
 scrollbar = tk.Scrollbar(
     result_frame
@@ -638,13 +704,16 @@ scrollbar.pack(
 
 result_box = tk.Text(
     result_frame,
-    height=25,
-    width=90,
-    font=("Consolas", 11)
+    height=30,
+    width=100,
+    font=("Consolas",12),
+    wrap=tk.WORD
 )
 
 result_box.pack(
-    side=tk.LEFT
+    side=tk.LEFT,
+    fill=tk.BOTH,
+    expand=True
 )
 
 
@@ -838,17 +907,21 @@ def clear_result():
     )
 
 clear_button = tk.Button(
-    root,
+    action_frame,
     text="Clear",
-    command=clear_result
+    command=clear_result,
+    font=("Consolas",12),
+    width=22
 )
 
 clear_button.pack()
 
 history_button = tk.Button(
-    root,
+    action_frame,
     text="View History",
-    command=show_history
+    command=show_history,
+    font=("Consolas",12),
+    width=22
 )
 
 history_button.pack(
@@ -856,9 +929,11 @@ history_button.pack(
 )
 
 save_note_button = tk.Button(
-    root,
+    input_frame,
     text="Save Note",
-    command=save_note
+    command=save_note,
+    font=("Consolas",12),
+    width=22
 )
 
 save_note_button.pack(
@@ -866,14 +941,26 @@ save_note_button.pack(
 )
 
 delete_button = tk.Button(
-    root,
+    input_frame,
     text="Delete Analysis",
-    command=delete_record
+    command=delete_record,
+    font=("Consolas",12),
+    width=22
 )
 
 delete_button.pack(
     pady=5
 )
 
-root.mainloop()
 
+footer = tk.Label(
+    root,
+    text="DOTA POS 1 COACH | Python + OpenDota API + SQLite",
+    font=("Consolas",9)
+)
+
+footer.pack(
+    pady=5
+)
+
+root.mainloop()
