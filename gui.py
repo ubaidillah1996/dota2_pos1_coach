@@ -614,8 +614,9 @@ def show_history():
 
             output += f"""
 
-ID:
-{record[0]}
+================================
+        MATCH HISTORY #{record[0]}
+================================
 
 Match ID:
 {record[1]}
@@ -626,6 +627,10 @@ Hero:
 Player:
 {record[3]}
 
+
+PERFORMANCE
+-----------
+
 KDA:
 {record[4]}
 
@@ -635,10 +640,17 @@ LH/min:
 GPM:
 {record[6]}
 
-Status:
+Result:
 {record[7]}
 
-------------------------------
+
+PERSONAL NOTE
+-------------
+
+{record[8]}
+
+
+================================
 
 """
 
@@ -691,6 +703,8 @@ def save_note():
         "Note updated successfully."
     )
 
+    show_history()
+
 
     note_entry.delete(
         0,
@@ -716,6 +730,16 @@ def delete_record():
         return
 
 
+    confirm = messagebox.askyesno(
+        "Confirm Delete",
+        f"Delete analysis record {record_id}?"
+    )
+
+
+    if not confirm:
+
+        return
+
     delete_analysis(
         record_id
     )
@@ -725,6 +749,8 @@ def delete_record():
         "Success",
         "Analysis deleted successfully."
     )
+
+    show_history()
 
 
     record_id_entry.delete(
