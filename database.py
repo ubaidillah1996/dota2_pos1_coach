@@ -14,14 +14,6 @@ def create_connection():
     return conn
 
 ## CREATING TABLE : ##
-
-def create_table():
-
-    conn = create_connection()
-
-    cursor = conn.cursor()
-
-
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS analyses (
@@ -86,6 +78,7 @@ def create_table():
 
 
 create_table()
+
 
 ## SAVING / ADD USER MATCHES FUNCTION ##
 
@@ -167,8 +160,6 @@ def view_history():
 
     return records
 
-
-    return records
 
 ## DELETING FUNCTION ##
 
@@ -270,3 +261,5 @@ def check_existing_analysis(match_id, hero):
 
 
     return result
+
+add_notes_column()
