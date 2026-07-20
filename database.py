@@ -263,3 +263,31 @@ def check_existing_analysis(match_id, hero):
     return result
 
 add_notes_column()
+
+def get_progress_history():
+
+    conn = create_connection()
+
+    cursor = conn.cursor()
+
+
+    cursor.execute(
+        """
+        SELECT
+            id,
+            gpm,
+            lh_per_min,
+            kda
+
+        FROM analyses
+
+        ORDER BY id ASC
+        """
+    )
+
+
+    records = cursor.fetchall()
+
+    conn.close()
+
+    return records

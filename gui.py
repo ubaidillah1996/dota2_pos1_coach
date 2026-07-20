@@ -13,8 +13,16 @@ from services import (
 from database import (
     view_history,
     update_note,
-    delete_analysis
+    delete_analysis,
+    get_progress_history
 )
+
+from visualizer import (
+    plot_benchmark_comparison,
+    plot_progress_history
+)
+
+current_analysis = None
 
 def display_analysis_result(analysis):
 
@@ -406,6 +414,10 @@ def analyse_match():
 
     print(analysis)
 
+    global current_analysis
+
+    current_analysis = analysis
+
     display_analysis_result(
         analysis
     )
@@ -413,6 +425,44 @@ def analyse_match():
 # =========================
 # MAIN WINDOW
 # =========================
+
+def show_performance_graph():
+
+    global current_analysis
+
+
+    if current_analysis is None:
+
+        messagebox.showerror(
+            "Error",
+            "Please analyse a match first."
+        )
+
+        return
+
+
+    plot_benchmark_comparison(
+        current_analysis["benchmark"]
+    )
+
+def show_progress_graph():
+
+    records = get_progress_history()
+
+
+    if len(records) == 0:
+
+        messagebox.showerror(
+            "Error",
+            "No historical data available."
+        )
+
+        return
+
+
+    plot_progress_history(
+        records
+    )
 
 root = tk.Tk()
 
@@ -541,6 +591,28 @@ analyse_button = tk.Button(
 
 analyse_button.pack(
     pady=20
+)
+
+graph_button = tk.Button(
+    root,
+    text="Performance Graph",
+    command=show_performance_graph,
+    font=("Consolas",12)
+)
+
+graph_button.pack(
+    pady=5
+)
+
+progress_button = tk.Button(
+    root,
+    text="Improvement Progress",
+    command=show_progress_graph,
+    font=("Consolas",12)
+)
+
+progress_button.pack(
+    pady=5
 )
 
 # =========================
